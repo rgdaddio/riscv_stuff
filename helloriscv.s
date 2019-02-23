@@ -1,5 +1,5 @@
-########;as --gdwarf-2 hello_world_arm.s -o hello_world_arm.o
-########;ld -s -o hello_world hello_world.o
+########;as --gdwarf-2 helloriscv.s -o helloriscv.o
+########;ld -s -o hellorisv helloriscv.o
 ########;Using GNU LD and GNU AS
 ########;Port from old Openrisc code the old hello world standby 
 
