@@ -6,4 +6,4 @@ And follow the easy instructions
 
 RISC-V is pretty much a one stop shop to get up and running. Very easy Very well done.
 
-RISC-V coder's delight: https://rv8.io/asm.html
+RISC-V assembly coder's delight: https://rv8.io/asm.html
