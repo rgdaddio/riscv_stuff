@@ -27,19 +27,19 @@ _start:
 
 main:	
 	
-	li a0, 2 			#stdout
+	li a0, 1 			#stdout FD
 	lui a1, %hi(myStr)		#high part of message
 	addi a1, a1, %lo(myStr)		#low part of message
 	li a2, len			#len
 	li a3, 0			#0-out a3
-	li a7, 64			#load syscall number
+	li a7, 64			#load write syscall number
 	ecall
 
 	li a0, 0
 	li a1, 0
 	li a2, 0
 	li a3, 0
-	li a7, 93			#exit system call
+	li a7, 93			#load exit system call number
 	ecall
 
 	.global main                  #;main routine for Spike PK
