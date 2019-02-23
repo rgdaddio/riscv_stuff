@@ -19,7 +19,7 @@ myStr:
 
 _start:	
 	
-	li a0, 0 			#stdout
+	li a0, 1 			#stdout
 	lui a1, %hi(myStr)		#high part of message
 	addi a1, a1, %lo(myStr)		#low part of messate
 	li a2, len			#len
