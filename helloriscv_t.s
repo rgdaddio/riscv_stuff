@@ -2,7 +2,7 @@
 ########;riscv64-unknown-elf-ld -o ttest helloriscv_t.o
 #or
 ########;riscv64-unknown-linux-gnu-as helloriscv_t.s -o helloriscv_t.riscv64
-########;risc64-unknown-linux-gnu-ld -o ttest helloriscv_t.o
+########;risc64-unknown-linux-gnu-ld -o ttest helloriscv_t.risc64
 ########;Run using Spike Sim: spike pk ttest 
 ########;Port from old Openrisc code the old hello world standby 
 
