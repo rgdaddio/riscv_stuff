@@ -42,5 +42,5 @@ main:
 	li a7, 93			#load exit system call number
 	ecall
 
-	.global main                  #;main routine for Spike PK
+	.global main                  #;main routine for Spike & Risc5 Proxy Kernel(PK)
 	.type main, @function
