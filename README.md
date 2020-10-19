@@ -8,9 +8,7 @@ RISC-V is pretty much a one stop shop to get up and running. Very easy Very well
 
 RISC-V assembly coder's delight: 
 
-https://rv8.io/asm.html
-
-https://rv8.io/syscalls.html
+https://github.com/rv8-io
 
 https://www.imperialviolet.org/2016/12/31/riscv.html
 
