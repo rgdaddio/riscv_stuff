@@ -19,7 +19,7 @@ https://cdn2.hubspot.net/hubfs/3020607/SiFive%20-%20RISCV%20101%20(1).pdf?t=1508
 https://content.riscv.org/wp-content/uploads/2016/11/riscv-privileged-v1.9.1.pdf#page=46
                                  
 
-QUICK TEST:
+QUICK 'hello world' test using tool chain and the spike simulator:
 
 Build a valid Risc5 GNU linux toolchain following these instructions:
 
@@ -29,7 +29,7 @@ Build the tools using the toolchain (e.g. export PATH=/opt/riscv/bin:$PATH)
 
 https://github.com/riscv/riscv-tools
 
-You should now have a version of Spike the target directory of the risc5 tools.
+You should now have a version of Spike the target directory of the risc5 tools (don't forget to build spike-pk).
 
 Assemble and Link the _t version of the code:
 
