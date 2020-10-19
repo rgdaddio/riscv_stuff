@@ -19,7 +19,7 @@ https://cdn2.hubspot.net/hubfs/3020607/SiFive%20-%20RISCV%20101%20(1).pdf?t=1508
 https://content.riscv.org/wp-content/uploads/2016/11/riscv-privileged-v1.9.1.pdf#page=46
                                  
 
-QUICK 'hello world' test using tool chain and the spike simulator:
+<b>QUICK 'hello world' test using tool chain and the spike simulator:</b>
 
 Build a valid Risc5 GNU linux toolchain following these instructions:
 
