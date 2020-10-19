@@ -47,7 +47,7 @@ The result should be:
 
 bbl loader
 
-hello riscv new world!!
+<b>hello riscv new world!!</b>
 
 
 //using real HW? Remember this:
