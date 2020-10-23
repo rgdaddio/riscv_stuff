@@ -10,6 +10,8 @@ RISC-V assembly coder's delight:
 
 https://github.com/rv8-io
 
+https://github.com/riscv/riscv-asm-manual/blob/master/riscv-asm.md
+
 https://www.imperialviolet.org/2016/12/31/riscv.html
 
 https://cdn2.hubspot.net/hubfs/3020607/SiFive%20-%20RISCV%20101%20(1).pdf?t=1508537822079
