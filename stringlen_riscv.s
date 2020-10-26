@@ -8,8 +8,6 @@ testgreeting:
 			.text
 	.global _start                  #;set up a start routine
 	.type _start, @function
-	.global main                  #;set up a start routine
-	.type main, @function
 
 ##############################################################################	
 	_start:
