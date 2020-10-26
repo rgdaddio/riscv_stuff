@@ -1,5 +1,5 @@
 #################################################################################
-#Small string length test code. Some extra function call for the hell of it
+#Small string length test code. Some extra function calls for the hell of it
 #For use in spike the risc5 simulator
 
 #test run 	
