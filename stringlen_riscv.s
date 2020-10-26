@@ -1,4 +1,4 @@
-################################################################################
+#################################################################################
 #Small string length test code. Some extra function call for the hell of it
 #For use in spike the risc5 simulator
 
@@ -8,7 +8,7 @@
 #spike pk strlen
 #
 #The norelax option can probably be removed on real linux	
-################################################################################
+#################################################################################
 			.data
 testgreeting:
 	.string "Simple string length test\n"
@@ -25,12 +25,12 @@ resultstr:
 	.string " is the length of tested string\n\n"
 	rlen = . - resultstr
 		
-################################################################################	
+#################################################################################	
 			.text
 	.global _start                  	#;set up a start routine
 	.type _start, @function
 
-################################################################################	
+#################################################################################	
 	_start:
 	li a0, 1 				#stdout
 	lui a1, %hi(testgreeting)		#high part of message
@@ -73,7 +73,7 @@ done:
 	sb t6, 0(a1)
 	ret
 
-################################################################################
+#################################################################################
 .global results
 	.type results,%function
 results:	
@@ -86,7 +86,7 @@ results:
 	ecall
 	ret
 
-################################################################################	
+#################################################################################	
 .global riscv_exit
 	.type riscv_exit,%function
 riscv_exit:
@@ -94,7 +94,7 @@ riscv_exit:
 	li a1, 0
 	li a2, 0
 	li a3, 0
-	li a7, 93			#exit system call
+	li a7, 93				#exit system call
 	ecall
 
 
