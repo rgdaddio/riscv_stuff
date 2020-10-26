@@ -24,9 +24,6 @@ myStr:
 	
 
 _start:	
-
-main:	
-	
 	li a0, 1 			#stdout FD
 	lui a1, %hi(myStr)		#high part of message
 	addi a1, a1, %lo(myStr)		#low part of message
