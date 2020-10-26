@@ -18,7 +18,7 @@
 				.data
 	
 	.type myStr,@object		#; define an array that hold a string
-	.size myStr, 12			#; myArr[] = {"hello world"}
+	.size myStr, 12			#; myStr[] = {"hello world"}
 myStr:
 	.string "hello world"
 				.option norelax
@@ -31,7 +31,8 @@ resultstr:
 	rlen = . - resultstr
 				.option norelax
 
-	.comm myArr2, 16, 1		#; with 1 char alignment
+	.comm myArr2, 16, 1		#; array with 1 char alignment
+					#; myStr hello world copied to myArr
 	
 				.option norelax
 endresultstr:
