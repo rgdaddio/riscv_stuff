@@ -18,11 +18,11 @@ testgreeting:
 
 testit:
 	.string "\nlength\n"
-	glen = . - testit
+	tlen = . - testit
 			.option norelax
 
 resultstr:
-	.string " is the length of test string\n\n"
+	.string " is the length of tested string\n\n"
 	rlen = . - resultstr
 		
 ################################################################################	
@@ -53,7 +53,7 @@ resultstr:
 
 	jal results
 
-	jal riscv_exit
+	j riscv_exit
 
 #################################################################################
 .global string_len
