@@ -21,29 +21,39 @@
 	.size myStr, 12			#; myStr[] = {"hello world"}
 myStr:
 	.string "hello world"
-				.option norelax
+
 testgreeting:
 	.string "Array copy using for loop:\n"
 	glen = . - testgreeting
-				.option norelax
+
 resultstr:
 	.string " => is in first array\n"
 	rlen = . - resultstr
-				.option norelax
 
-	.comm myArr2, 16, 1		#; array with 1 char alignment
-					#; myStr hello world copied to myArr
-	
-				.option norelax
 endresultstr:
 	.string " => is now byte byte copied into second array\n"
 	elen = . - endresultstr
+	
+	
+	.comm myArr2, 16, 1		#; array with 1 char alignment
+					#; myStr hello world copied to myArr
 	
 				.text
 ################################################################################
 .global _start
 .type _start,@function
 _start:
+
+	###########################################
+	###########Initialize gp register##########
+	.option push
+	.option norelax
+	1:auipc gp, %pcrel_hi(__global_pointer$)
+	addi  gp, gp, %pcrel_lo(1b)
+	.option pop
+	.option relax
+	###########################################
+	
 	li		a0, 0x1				#; stdfile no 1
 	lui		a1, %hi(testgreeting)		#; move upper 16 in
         addi 		a1, a1, %lo(testgreeting)	#; or in the lower 16
