@@ -7,31 +7,42 @@
 #riscv64-unknown-linux-gnu-ld -o strlen stringlen_riscv.o
 #spike pk strlen
 #
-#The norelax option can probably be removed on real linux	
+#	
 #################################################################################
+
 			.data
 testgreeting:
 	.string "Simple string length test\n"
 	glen = . - testgreeting
 
-			.option norelax #kill the evil gp
-
 testit:
-	.string "\nlength\n"
+	.string "\ngilbert\n"
 	tlen = . - testit
-			.option norelax
 
 resultstr:
 	.string " is the length of tested string\n\n"
 	rlen = . - resultstr
 		
 #################################################################################	
+
 			.text
+
+
+#################################################################################
 	.global _start                  	#;set up a start routine
 	.type _start, @function
+_start:
 
-#################################################################################	
-	_start:
+	###########################################
+	###########Initialize gp register##########
+	.option push
+	.option norelax
+	1:auipc gp, %pcrel_hi(__global_pointer$)
+	addi  gp, gp, %pcrel_lo(1b)
+	.option pop
+	.option relax
+	###########################################
+
 	li a0, 1 				#stdout
 	lui a1, %hi(testgreeting)		#high part of message
 	addi a1, a1, %lo(testgreeting)		#low part of messate
