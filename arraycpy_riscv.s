@@ -13,7 +13,7 @@
 #riscv64-unknown-linux-gnu-ld -o arraycpy array_riscv.o
 #spike pk arraycpy
 #
-#The norelax option can probably be removed on real linux	
+#	
 #################################################################################
 				.data
 	
