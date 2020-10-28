@@ -17,7 +17,17 @@ myStr:
 	.global _start                  #;set up a start routine
 	.type _start, @function
 
-_start:	
+_start:
+
+	###########################################
+	###########Initialize gp register##########
+	.option push
+	.option norelax
+	1:auipc gp, %pcrel_hi(__global_pointer$)
+	addi  gp, gp, %pcrel_lo(1b)
+	.option pop
+	.option relax
+	###########################################
 	
 	li a0, 1 			#stdout
 	lui a1, %hi(myStr)		#high part of message
