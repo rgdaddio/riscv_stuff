@@ -57,3 +57,4 @@ bbl loader
 
 //using real HW? Remember this:
 Connecting to HiFive:  `sudo screen /dev/ttyUSB1 115200`
+The example flashem_riscv_hifive.s will run on the HiFive 1 Try It!!
