@@ -5,7 +5,7 @@
 
 #Barebones LED flasher and UART test print.
 #Assemble and link the old fashioned way
-#riscv64-unknown-elf-as -march=rv32imac -mabi=ilp32 flashem.S -o flashem.o
+#riscv64-unknown-elf-as -march=rv32imac -mabi=ilp32 flashem_riscv_hifive.s -o flashem.o
 #riscv32-unknown-elf-ld -T/home/rich/new_risc5/freedom/freedom-e-sdk/bsp/sifive-hifive1/metal.default.lds flashem.o -o flashem
 #scripts/upload --elf flashem --openocd openocd --gdb riscv64-unknown-elf-gdb --openocd-config bsp/sifive-hifive1/openocd.cfg	
 	
