@@ -1,6 +1,7 @@
 #Flash leds on Sifive Hifive test board. This will likely work on most HiFive board revs
 #This does use the freedom metal environment for some basics and won't work unless that is used
-#The freedom metal libs and elf loader requirements/expectations are used. 	
+#The freedom metal libs and elf loader requirements/expectations are required.
+#Use other examples in the directory if you want to use Spike simulator with more standard syscalls(like write). 	
 
 #Barebones LED flasher and UART test print.
 #Assemble and link the old fashioned way
