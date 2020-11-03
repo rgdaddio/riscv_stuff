@@ -122,7 +122,7 @@ inituart:
 .global txuart
 .type txuart,@function
 txuart:
-	li a0, 0x46
+	li a0, 0x46		#Load char 'F'
 	li t3, 0x0
 	li t4, UARTBASE		#BASE
 	li t5, 0x80000000	#TXFULL
@@ -132,20 +132,20 @@ txloop:	and t3, t5, t6
 	andi a0, a0, 0x000000FF	#TXDATA
 	
 #Hand craft FLASHEM print message####################	
+	sw a0, 0(t4)		
+	li a0, 0x4C		#'L'
+	sw a0, 0(t4)		
+	li a0, 0x41		#'A'
+	sw a0, 0(t4)		
+	li a0, 0x53		#'S'
 	sw a0, 0(t4)
-	li a0, 0x4C
+	li a0, 0x48		#'H'
 	sw a0, 0(t4)
-	li a0, 0x41
+	li a0, 0x45		#'E'
 	sw a0, 0(t4)
-	li a0, 0x53
+	li a0, 0x4d		#'M'
 	sw a0, 0(t4)
-	li a0, 0x48
-	sw a0, 0(t4)
-	li a0, 0x45
-	sw a0, 0(t4)
-	li a0, 0x4d
-	sw a0, 0(t4)
-	li a0, 0x0a
+	li a0, 0x0a		#'\n'
 	sw a0, 0(t4)
 #####################################################	
 	ret
