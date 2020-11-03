@@ -1,5 +1,6 @@
 # riscv_stuff
-RISC-V assembly code examples. Files with the _t are runnable in the RISC-V simulator Spike.
+RISC-V assembly code examples. Files with hifive in the name are runnable on the RISC-V HiFive 1 board,
+those without the HiFive are runnable in the RISC-V Spike simulator.
 
 If you don't have a toolchain or simulator you can pull them from github (see below) 
 And follow the easy instructions
