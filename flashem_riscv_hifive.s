@@ -71,7 +71,6 @@ clearit:
 	sw t1, 0x08(t0)		#ctrls & port
 	sw t1, 0x0C(t0)
 	sw t1, 0x40(t0)
-
 	ret
 
 .global delayit
