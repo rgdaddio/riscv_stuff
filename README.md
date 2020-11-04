@@ -38,15 +38,15 @@ You should now have a version of Spike the target directory of the risc5 tools (
 Assemble and Link the helloriscv code:
 
 ```
-riscv64-unknown-linux-gnu-as helloriscv.s -o helloriscv.o
+riscv64-unknown-linux-gnu-as hello_riscv.s -o hello_riscv.o
 
-risc64-unknown-linux-gnu-ld -o helloriscv helloriscv.o
+risc64-unknown-linux-gnu-ld -o hello_riscv hello_riscv.o
 ```
 
 Now run the ttest `hello world` in the simulator (note: be sure you ran the `build-spike-pk.sh` when building the riscv-tools):
 
 ```
-spike pk helloriscv
+spike pk hello_riscv
 ```
 
 The result should be:
