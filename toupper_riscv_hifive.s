@@ -1,4 +1,12 @@
+#Take a short hello string and uppperized it. Just a little test to work out the uart interface
 
+#build	
+#riscv64-unknown-elf-as -march=rv32imac -mabi=ilp32 toupper_risc.s  -o toupper_risc.o
+#riscv32-unknown-elf-ld -T/home/rich/new_risc5/freedom/freedom-e-sdk/bsp/sifive-hifive1/metal.default.lds --defsym=__heap_max=1 toupper_risc.o -o toupper_risc
+
+#Load it onto Riscv HiFive using freedom metal loader
+#scripts/upload --elf toupper_risc --openocd openocd --gdb riscv64-unknown-elf-gdb --openocd-config bsp/sifive-hifive1/openocd.cfg	
+	
 .equ UARTTX, (1 << 17)
 .equ UARTRX, (1 << 16)
 .equ GPIOBASE, 0x10012000
@@ -51,7 +59,6 @@ spin:
 
 	jal 		txuart
 	jal             delayit
-#	jal             upperizeit
 	beq		a3, a2, done
 	addi 		a3, a3, 1
 	addi 		a1, a1, 1
