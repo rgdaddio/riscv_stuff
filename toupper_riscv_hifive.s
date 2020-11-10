@@ -46,7 +46,7 @@ _start:
 	###########################################
 
 	jal inituart
-
+#again:	
 	lui		a1, %hi(testgreeting)		#; move upper 16 in
         addi 		a1, a1, %lo(testgreeting)	#; or in the lower 16
 	li		a2, glen
@@ -63,8 +63,9 @@ spin:
 	addi 		a3, a3, 1
 	addi 		a1, a1, 1
 	j		spin
-done:	
+done:
 	jal upperizeit
+#	j again 				#keep looping
 	ret
 
 .global upperizeit
