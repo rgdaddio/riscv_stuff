@@ -30,7 +30,12 @@ testgreeting:
 .global _start
 .type _start,@function
 _start:
-    # setup stacks per hart
+	#Thanks to Adventures in RISC-V for this little piece of init code
+	#It is not really needed for this level of assembly code but is used
+	#in case as a test and just if 'c' is ever needed. Also using _enter quiets the
+	#whining linker
+
+	# setup stacks per hart
    csrr t0, mhartid                # read current hart id
    slli t0, t0, 10                 # shift left the hart id by 1024
    la   sp, stacks + STACK_SIZE    # set the initial stack pointer 
