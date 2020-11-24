@@ -79,7 +79,7 @@ spin:
 	addi 		a1, a1, 1			#; incr string pointer 
 	addi 		a5, a5, 1			#; incr mem pointer
 	j		spin
-done:	
+done:
 	ret
 
 
