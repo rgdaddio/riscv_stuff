@@ -53,13 +53,13 @@ repeat:
 .global sequenceit
 .type sequenceit,@function
 sequenceit:
-	addi sp, sp, 16 	#get some stack
+	addi sp, sp, -16 	#get some stack
 	sw ra, 0(sp)		#save the return address (for nested funcs)
 	jal flashit
 	jal delayit
 	jal clearit
 	lw ra, 0(sp)		#get the return address of caller(_start)
-	addi sp, sp, -16
+	addi sp, sp, 16
 	ret
 	
 .global clearit
