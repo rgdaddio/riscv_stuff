@@ -1,22 +1,36 @@
-########;as --gdwarf-2 helloriscv.s -o helloriscv.o
-########;ld -s -o hellorisv helloriscv.o
 ########;Using GNU LD and GNU AS
-########;Port from old Openrisc code the old hello world standby 
+########;Port from old Openrisc and Arm code the old hello world standby 
 
+#################################################################################
+#Old standby  Some extra function calls for the hell of it
+#For use in spike the risc5 simulator
 
+#test run 	
+#riscv64-unknown-linux-gnu-as stringlen_riscv.s -o stringlen_riscv.o
+#riscv64-unknown-linux-gnu-ld -o strlen stringlen_riscv.o
+#spike pk strlen
+#
+#	
+#################################################################################
 
 	.data
 
 myStr:
-	.string "hello riscv new world!!\n" #;basic string data
+	.string "hello riscv new world!!\n"  #;basic string data
 
-	len = . - myStr                 #;get the length via intrinsic
+	len = . - myStr                      #;get the length via intrinsic
+
+
 
 	.text
 
-	.global _start                  #;set up a start routine
-	.type _start, @function
-
+################################General start function###########################
+#Input:                                                                         #
+#Output:                                                                        #
+#Returns to system                                                              #
+#################################################################################	
+.global _start                  #;set up a start routine
+.type _start, @function
 _start:
 
 	###########################################
