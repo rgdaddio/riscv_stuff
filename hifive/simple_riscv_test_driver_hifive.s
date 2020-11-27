@@ -5,7 +5,7 @@
 		.section 	.rodata
 
 testgreeting:
-		.string "\narray_test\n"
+		.string "array_testershr\n"
 		glen = . - testgreeting
 
 .align 2 #2**2	
@@ -55,16 +55,7 @@ _enter:
 	lui		a1, %hi(testgreeting)		#; move upper 16 in
         addi 		a1, a1, %lo(testgreeting)	#; add in the lower
 	li 		a2, glen			#; use the const string len
-	li		a3, 1				#; set a counter to 1
 
-spin:	
-	lb		a0, 0(a1)			#; get a byte from greetinn
-	jal 		txuart				#; print the byte to uart
-	jal             delayit				#; let uart catch up
-	beq		a3, a2, done			#; get out if cntr reach len
-	addi 		a3, a3, 1			#; incr counter
-	addi 		a1, a1, 1			#; incr string pointer
+	jal             pstring
 
-	j		spin
-done:
 	ret
