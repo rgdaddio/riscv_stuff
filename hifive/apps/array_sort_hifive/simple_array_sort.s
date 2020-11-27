@@ -76,29 +76,29 @@ _enter:
 	mv              s5, s4
 	li              s2, 0
 	li              s3, ARR_SIZE
-walk:	
+walk:							#; walk the sting in rodata and push into ram
 	lb              a0, 0(a1)
 	sb              a0, 0(s4)
 	jal             pchar
 
-        addi            a1, a1, 4
+        addi            a1, a1, 4                       #; increment counters mems are byte(4) index (1)
 	addi            s4, s4, 4
 	addi            s2, s2, 1
-	blt             s2, s3, walk
+	blt             s2, s3, walk                    #; walk it to ARR_SIZE
 	
-	lui             a1, %hi(makespace)
+	lui             a1, %hi(makespace)              #; pretty print shit
 	addi            a1, a1, %lo(makespace)
 	li              a2, slen
 	jal             pstring
 	
-	mv		a0, s5
+	mv		a0, s5				#; move local data to args for function
 	mv		a1, s3
 	jal             sort_hifive
 
 	li              s2, 0
-	mv              a1, s5
+	mv              a1, s5				#; saved off memory base address
 walk2:	
-	lb		a0, 0(a1)
+	lb		a0, 0(a1)                       #; walk sorted array in memory
         jal 		pchar
 	addi            a1, a1, 4
 	addi            s2, s2, 1
