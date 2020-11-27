@@ -7,7 +7,7 @@ delayit:
 	sw   s2, 0x18(sp)
 	sw   s3, 0x14(sp)
 	
-	mv s2, x0        	#counter
+	mv s2, zero        	#counter
 	li s3, 0x25000	 	#some loop time
 loop:
 	addi s2, s2, 1

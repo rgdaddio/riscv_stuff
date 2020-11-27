@@ -1,16 +1,29 @@
+###riscv64-unknown-elf-as -march=rv32imac -mabi=ilp32 simple_riscv_test_driver_hifive.s ../lib/uart_hifive.s ../lib/delay_hifive.s ../lib/pchar_hifive.s ../lib/pstring_hifive.s ../lib/swap_hifive.s ../lib/sort_hifive.s -o simple_riscv_test_driver_hifive.o
+
+###riscv32-unknown-elf-ld -T/home/rich/new_risc5/freedom/freedom-e-sdk/bsp/sifive-hifive1/metal.default.lds simple_riscv_test_driver_hifive.o -o simple_riscv_test_driver_hifivev2	
+
+	
+
+
 .equ STACK_SIZE, 1024
 .equ MEM_BASE, 0x80000000
-.equ MEM_SIZE, 0x4000	
+.equ MEM_SIZE, 0x4000
+.equ ARR_SIZE, 0xa	
 
 		.section 	.rodata
 
 testgreeting:
-		.string "array_testershr\n"
+		.string "\narray_sort:\n\t"
 		glen = . - testgreeting
 
-.align 2 #2**2	
+makespace:
+		.string "\n\t\n"
+		slen = . - makespace
+	
+
+.align 2 #######2**2	
 array_initialized:
-.word 0x35,0x33,0x36,0x37,0x32,0x38,0x37,0x31,0x39,0x35	
+.word 0x35,0x33,0x36,0x37,0x32,0x38,0x34,0x31,0x39,0x35	
 	
 
 # Using hardware detection and stack sizing per Hart. Trick code into thinking
@@ -55,7 +68,39 @@ _enter:
 	lui		a1, %hi(testgreeting)		#; move upper 16 in
         addi 		a1, a1, %lo(testgreeting)	#; add in the lower
 	li 		a2, glen			#; use the const string len
-
 	jal             pstring
 
+	lui             a1, %hi(array_initialized)
+	addi            a1, a1, %lo(array_initialized)
+	li 		s4, MEM_BASE
+	mv              s5, s4
+	li              s2, 0
+	li              s3, ARR_SIZE
+walk:	
+	lb              a0, 0(a1)
+	sb              a0, 0(s4)
+	jal             pchar
+
+        addi            a1, a1, 4
+	addi            s4, s4, 4
+	addi            s2, s2, 1
+	blt             s2, s3, walk
+	
+	lui             a1, %hi(makespace)
+	addi            a1, a1, %lo(makespace)
+	li              a2, slen
+	jal             pstring
+	
+	mv		a0, s5
+	mv		a1, s3
+	jal             sort_hifive
+
+	li              s2, 0
+	mv              a1, s5
+walk2:	
+	lb		a0, 0(a1)
+        jal 		pchar
+	addi            a1, a1, 4
+	addi            s2, s2, 1
+	blt             s2, s3, walk2
 	ret

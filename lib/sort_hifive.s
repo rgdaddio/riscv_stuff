@@ -1,4 +1,5 @@
-#Basic bubble sort
+#Basic bubble sort. This small sort shows the simiarlty between RISCV and MIPS as it is essentially the same sort
+#shown in Patterson & Hennessy	
 
 #Input:	
 #a0 contains address of array
@@ -17,24 +18,23 @@ sort_hifive:
 		sw   s1, 0x10(sp)
 		sw   s0, 0xc(sp)
 
-
 		mv  s2, a0 	 	#arg 0
 		mv  s3, a1		#arg 1
 
 		mv  s0, zero		#set a 0 
 Oloop:
 		slt  t0, s0, s3		#check passed in index for 0
-		beq  t0, zero, ExitO	#finished
+		beq  t0, zero, ExitI	#finished
 		addi s1, s0, -1
 Iloop:
 		slti t0, s1, 0
-		bne  t0, zero, ExitI
+		bne  t0, zero, ExitO
 		sll  t1, s1, 2
 		add  t2, s2, t1
 		lw   t3, 0(t2)
 		lw   t4, 4(t2)
 		slt  t0, t4, t3
-		beq  t0, zero, ExitI
+		beq  t0, zero, ExitO
 
 		mv  a0, s2
 		mv  a1, s1
