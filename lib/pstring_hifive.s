@@ -15,12 +15,10 @@ pstring:
 
 spin:
 	lb    a0, 0(s3)
-#	lb a0,0(a1)
 	jal   pchar
 	beq   s2, a2, done
 	addi  s2, s2, 1
 	addi  s3, s3, 1
-#	addi a1, a1, 1
 	mv    a0, zero
 	j     spin
 
