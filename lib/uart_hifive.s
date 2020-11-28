@@ -67,3 +67,31 @@ txloop:	and s2, s4, s5
 	lw   ra, 0x1c(sp)
 	addi sp, sp, 0x20
 	ret
+
+
+
+.global shutdownuart
+.type shutdownuart,@function
+shutdownuart:
+	addi sp, sp, -0x20
+	sw   ra, 0x1c(sp)
+	sw   s2, 0x18(sp)
+	sw   s3, 0x14(sp)
+	sw   s4, 0x10(sp)
+#GPIO section	
+	li   s2, GPIOBASE 	#GPIO BASE
+	lw   s3, 0x38(s2)	#GPIO OUTPUT ENABLE
+	li   s4, 0x0		#RX BIT
+	and   s3, s3, s4
+	li   s4, 0x0		#TX BIT
+	and   s3, s3, s4
+	sw   s3, 0x38(s2)	#END RMW
+
+	lw   s4, 0x10(sp)
+	lw   s3, 0x14(sp)
+	lw   s2, 0x18(sp)
+	lw   ra, 0x1c(sp)
+	addi sp, sp, 0x20
+	ret
+	
+	

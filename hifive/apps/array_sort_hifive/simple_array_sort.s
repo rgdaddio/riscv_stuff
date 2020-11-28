@@ -13,7 +13,7 @@
 		.section 	.rodata
 
 testgreeting:
-		.string "\narray_sort:\n\t"
+		.string "\n\n\tarray_sort:\n\t"
 		glen = . - testgreeting
 
 makespace:
@@ -103,4 +103,6 @@ walk2:
 	addi            a1, a1, 4
 	addi            s2, s2, 1
 	blt             s2, s3, walk2
+
+	jal             shutdownuart             
 	ret
