@@ -3,7 +3,7 @@ TOOLS = /opt/riscvNewlib/bin/
 HOME = /home/rich/new_risc5/
 
 all: array_sort_hifive
-	cp array_sort_hifive $(HOME)/freedom/freedom-e-sdk
+	cp array_sort_hifive $(HOME)freedom/freedom-e-sdk
 array_sort_hifive: test_driver_hifive.o
 	$(TOOLS)riscv32-unknown-elf-ld -T$(HOME)freedom/freedom-e-sdk/bsp/sifive-hifive1/metal.default.lds --defsym=__heap_max=1 test_driver_hifive.o -o array_sort_hifive
 
