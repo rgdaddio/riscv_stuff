@@ -19,6 +19,9 @@ https://cdn2.hubspot.net/hubfs/3020607/SiFive%20-%20RISCV%20101%20(1).pdf?t=1508
 
 https://content.riscv.org/wp-content/uploads/2016/11/riscv-privileged-v1.9.1.pdf#page=46
 
+Interrupts:
+https://sifive.cdn.prismic.io/sifive/0d163928-2128-42be-a75a-464df65e04e0_sifive-interrupt-cookbook.pdf
+
 Nice synopsis:
 https://pdos.csail.mit.edu/6.828/2019/lec/l-riscv.txt
 
