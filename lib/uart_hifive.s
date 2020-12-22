@@ -68,6 +68,29 @@ txloop:	and s2, s4, s5
 	addi sp, sp, 0x20
 	ret
 
+.global rxuart
+.type rxuart,@function
+rxuart:
+	addi sp, sp, -0x20
+	sw   ra, 0x1c(sp)
+	sw   s2, 0x18(sp)
+	sw   s3, 0x14(sp)
+	sw   s4, 0x10(sp)
+	sw   s5, 0xc(sp)
+	
+	li s2, 0x0
+	li s3, UARTBASE		#BASE
+	li s4, 0x80000000	#RXEMPTY
+rxloop:	lw a0, 0x4(s3)
+	and s5, a0, s4
+	bnez s5, rxloop
+	lw   s5, 0xc(sp)
+	lw   s4, 0x10(sp)
+	lw   s3, 0x14(sp)
+	lw   s2, 0x18(sp)
+	lw   ra, 0x1c(sp)
+	addi sp, sp, 0x20
+	ret
 
 
 .global shutdownuart

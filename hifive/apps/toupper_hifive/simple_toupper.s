@@ -66,6 +66,7 @@ _enter:
 
 park:
 		wfi
+		j _start
 		j park
 
 	ret
