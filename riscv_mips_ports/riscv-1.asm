@@ -69,10 +69,12 @@ main:
 	li t3, 0x30303000
 	add t0, t0, t3
 				#(mips guys)İki tane yazdığımız integer değerleri toplayıp t2 temporary değere aktardık.s
+	mv a0, t0
+	mv a1, t0
 	jal asciiadd
 
 	la t3, myArr2
-	sw t2, 0(t3)
+	sw a1, 0(t3)
 
 	mv a1, t3
 	li a0, 1
