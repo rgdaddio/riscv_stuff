@@ -1,10 +1,11 @@
 #test run 	
-#riscv64-unknown-linux-gnu-as riscv-1.asm -o riscv-1.o
+#riscv64-unknown-linux-gnu-as riscv-1.asm ../lib/ascii_add.s ../lib/htonl_riscv.s -o riscv-1.o
 #riscv64-unknown-linux-gnu-ld -o riscv-1 riscv-1.o
 #spike pk riscv-1
 #This is a quick port from MIPs example by https://github.com/ffcabbar/MIPS-Assembly-Language-Examples
-#It is mostly a straight copy MIPs just has more system call support remove $ from MIPs and change
-#syscall to ecall and change MIPs v0 reg to RISCV a0 and done
+#It is mostly a straight copy of MIPs with some name changes and MIPsjust has more system call support.
+#But in reality remove '$' from MIPs reg names  and change syscall to ecall and change MIPs v0 reg to
+#RISCV a0 and done
 
 #Current limitations RISCV kernel(pk) is not as rich as MIPs linux kernal and does support print int so
 #the ascii adder support lib only prints to 18 and needs zero padding this should be cleaned up too lazy 
