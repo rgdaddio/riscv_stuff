@@ -37,7 +37,12 @@ space: .ascii "\t"
 	                .type _start, @function
 
 _start:
+#	j _enter
 
+#.globl _enter
+#.type _enter,@function
+		
+#_enter:	
 
 	
 	###########################################
@@ -99,3 +104,6 @@ upperizeit:
 	j 		upperizeit
 finish:	
 	ret
+
+
+	
