@@ -37,41 +37,32 @@
 .equ MEM_SIZE, 0x4000
 .equ ARR_SIZE, 0xa	
 
-		.section 	.rodata	
-.align 2 #######2**2	
+
+	.section 	.rodata	
 flash_array_initialized:
 	.word 0x46,0x4C,0x41,0x53,0x48,0x45,0x4d,0x0a
-	
-	.section .text
 
+	
+
+	.section 	.init
+
+.globl _enter
+.type _enter,@function
+_enter:
+	j _start
+	ret
+
+
+	.section	.data
+live_arry:	
+	.word 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0	
+
+
+	.section 	.text
+	
 .globl _start
 .type _start,@function
-
 _start:
-#  csrr t0, mhartid                	# read current hart id
-#  slli t0, t0, 10                 	# shift left the hart id by 1024
-#   la   sp, stacks + STACK_SIZE    	# set the initial stack pointer 
-        				# to the end of the stack space
-#   add  sp, sp, t0                 	# move the current hart stack pointer
-        				# to its place in the stack space
-
-					# park harts with id != 0
-#    csrr a0, mhartid			# read current hart id
-#    bnez a0, park                   	# if we're not on the hart 0
-        				# we park the hart
-	
-#	j _enter
-#park:
-#		wfi
-#		j park
-#stacks:
-#	.skip STACK_SIZE * 4            # allocate	
-
-#.global _enter
-#.type _enter,@function
-#_enter:
-	
-
 	jal inituart
 
 repeat:	
@@ -94,7 +85,7 @@ sequenceit:
 	addi sp, sp, -16 	#get some stack
 	sw ra, 0(sp)		#save the return address (for nested funcs)
 	jal flashit
-	jal ldelayit
+	jal delayit
 	jal clearit
 	lw ra, 0(sp)		#get the return address of caller(_start)
 	addi sp, sp, 16
@@ -111,15 +102,6 @@ clearit:
 	sw t1, 0x40(t0)
 	ret
 
-.global ldelayit
-.type ldelayit,@function
-ldelayit:
-	mv t2, x0        	#counter
-	li t3, 0x500000 	#some loop time
-l_loop:
-	addi t2, t2, 1
-	bne t2, t3, l_loop
-	ret
 
 .global flashit
 .type flashit,@function
@@ -136,12 +118,18 @@ flashit:
 .global flashem_lprint
 .type flashem_lprint,@function
 flashem_lprint:
-	addi sp, sp, -16 	#get some stack
-	sw ra, 0(sp)
+	addi sp, sp, -0x20
+	sw   ra, 0x1c(sp)
+	sw   s2, 0x18(sp)
+	sw   s3, 0x14(sp)
+	sw   s4, 0x10(sp)
+	sw   s5, 0xc(sp)
+	sw   s1, 0x8(sp)
 	
 	lui             a1, %hi(flash_array_initialized)
 	addi            a1, a1, %lo(flash_array_initialized)
 	li 		s4, MEM_BASE
+
 	mv              s5, s4
 	li              s2, 0
 	li              s3, 0xa
@@ -158,6 +146,15 @@ lwalk:							#; walk the string in rodata and push into ram
 
 	bne             s1, s3, lwalk               
 							#; get the return address of caller(_start)
-	lw ra, 0(sp)					
-	addi sp, sp, 16
+	lw   s1, 0x8(sp)
+	lw   s5, 0xc(sp)
+	lw   s4, 0x10(sp)
+	lw   s3, 0x14(sp)
+	lw   s2, 0x18(sp)
+	lw   ra, 0x1c(sp)
+	addi sp, sp, 0x20
 	ret
+
+
+
+	
