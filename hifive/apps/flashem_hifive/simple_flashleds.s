@@ -124,29 +124,26 @@ flashem_lprint:
 	sw   s3, 0x14(sp)
 	sw   s4, 0x10(sp)
 	sw   s5, 0xc(sp)
-	sw   s1, 0x8(sp)
 	
 	lui             a1, %hi(flash_array_initialized)
 	addi            a1, a1, %lo(flash_array_initialized)
 	li 		s4, MEM_BASE
 
-	mv              s5, s4
 	li              s2, 0
 	li              s3, 0xa
 
 lwalk:							#; walk the string in rodata and push into ram
 	lb              a0, 0(a1)
 	sb              a0, 0(s4)
-	mv              s1, a0
+	mv              s5, a0
 	jal             pchar
 
 	addi            a1, a1, 4                       #; increment counters mems are byte(4) index (1)
 	addi            s4, s4, 4
 	addi            s2, s2, 1
 
-	bne             s1, s3, lwalk               
+	bne             s5, s3, lwalk               
 							#; get the return address of caller(_start)
-	lw   s1, 0x8(sp)
 	lw   s5, 0xc(sp)
 	lw   s4, 0x10(sp)
 	lw   s3, 0x14(sp)
