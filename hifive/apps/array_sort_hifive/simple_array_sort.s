@@ -20,50 +20,38 @@ makespace:
 		.string "\n\t\n"
 		slen = . - makespace
 	
-
-.align 2 #######2**2	
 array_initialized:
-.word 0x35,0x33,0x36,0x37,0x32,0x38,0x34,0x31,0x39,0x35	
+.word 0x35,0x33,0x36,0x37,0x32,0x38,0x34,0x31,0x39,0x35		
+
+		.section 	.init
+
+# Using hardware detection and Harts.
 	
-
-# Using hardware detection and stack sizing per Hart. Trick code into thinking
-# it is going to 'c' when it is really going to Assembly _enter...
-	
-.global _start
-.type _start,@function
-_start:
-	#Thanks to Adventures in RISC-V for this little piece of init code
-	#It is not really needed for this level of assembly code but is used
-	#in case as a test and just if 'c' is ever needed. Also using _enter quiets the
-	#whining linker
-
-	# setup stacks per hart
-   csrr t0, mhartid                	# read current hart id
-   slli t0, t0, 10                 	# shift left the hart id by 1024
-   la   sp, stacks + STACK_SIZE    	# set the initial stack pointer 
-        				# to the end of the stack space
-   add  sp, sp, t0                 	# move the current hart stack pointer
-        				# to its place in the stack space
-
-    # park harts with id != 0
-    csrr a0, mhartid			# read current hart id
-    bnez a0, park                   	# if we're not on the hart 0
-        				# we park the hart
-
-    j    _enter                      	# jump to assembly _enter
-
-park:
-		wfi
-		j park
-
-stacks:
-	.skip STACK_SIZE * 4            # allocate
-
-
-.globl _enter
+.global _enter
 .type _enter,@function
+_enter:
+
+	csrr t0, mhartid                	# read current hart id
+	slli t0, t0, 10                 	# shift left the hart id by 1024
+
+	csrr a0, mhartid			# read current hart id
+
+	jal    _start                      	# jump to assembly _enter
+
+	
+	.section		.data
+
+array_holder:
+	.word 0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0	
+	
+
+	.section		.text	
+
+.globl _start
+.type _start,@function
 		
-_enter:							
+_start:
+	mv              s9, ra
 	jal		inituart			#; initialize the uart
 	lui		a1, %hi(testgreeting)		#; move upper 16 in
         addi 		a1, a1, %lo(testgreeting)	#; add in the lower
@@ -104,5 +92,7 @@ walk2:
 	addi            s2, s2, 1
 	blt             s2, s3, walk2
 
-	jal             shutdownuart             
+	jal             shutdownuart
+
+	mv ra, s9					#; back to _enter
 	ret
